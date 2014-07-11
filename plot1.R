@@ -8,7 +8,7 @@ my_data <- read.csv2("household_power_consumption.txt",
                      colClasses=c(rep("character",2),rep("numeric",7)),
                      na.strings=c("NA",""," ","?"))
 
-#Keep only the data from the dates we are interesting in: 1/2/2007 and 2/2/2007
+#Keep only the data from the dates we are interested in: 1/2/2007 and 2/2/2007
 my_data <- my_data[my_data$Date=="1/2/2007" | my_data$Date=="2/2/2007",]
 
 #Make time objects from the first two columns of the data set and replace
@@ -23,14 +23,16 @@ my_data$Time <- strptime(mapply(paste,
 colnames(my_data)[2] <- "Date.Time"
 my_data <- my_data[,-1]
 
+#Set up the graphics device
+png(filename="plot1.png")
+
 #Plot the data we want
 with(my_data, hist(Global_active_power,
                    main="Global Active Power",
                    xlab="Global Active Power (kilowatts)",
                    col="red"))
 
-#Copy the plot to the png file
-dev.copy(png, file="plot1.png")
+#Close the graphics device
 dev.off()
 
 #Clean the workspace

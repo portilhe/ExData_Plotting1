@@ -8,7 +8,7 @@ my_data <- read.csv2("household_power_consumption.txt",
                      colClasses=c(rep("character",2),rep("numeric",7)),
                      na.strings=c("NA",""," ","?"))
 
-#Keep only the data from the dates we are interesting in: 1/2/2007 and 2/2/2007
+#Keep only the data from the dates we are interested in: 1/2/2007 and 2/2/2007
 my_data <- my_data[my_data$Date=="1/2/2007" | my_data$Date=="2/2/2007",]
 
 #Make time objects from the first two columns of the data set and replace
@@ -23,6 +23,9 @@ my_data$Time <- strptime(mapply(paste,
 colnames(my_data)[2] <- "Date.Time"
 my_data <- my_data[,-1]
 
+#Set up the graphics device
+png(filename="plot3.png")
+
 #Plot the data we want
 with(my_data,plot(Date.Time, Sub_metering_1,
                   type="n",
@@ -36,8 +39,7 @@ legend("topright",
        legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),
        lty=1)
 
-#Copy the plot to the png file
-dev.copy(png, file="plot3.png")
+#Close the graphics device
 dev.off()
 
 #Clean the workspace

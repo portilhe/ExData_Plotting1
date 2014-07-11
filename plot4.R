@@ -8,7 +8,7 @@ my_data <- read.csv2("household_power_consumption.txt",
                      colClasses=c(rep("character",2),rep("numeric",7)),
                      na.strings=c("NA",""," ","?"))
 
-#Keep only the data from the dates we are interesting in: 1/2/2007 and 2/2/2007
+#Keep only the data from the dates we are interested in: 1/2/2007 and 2/2/2007
 my_data <- my_data[my_data$Date=="1/2/2007" | my_data$Date=="2/2/2007",]
 
 #Make time objects from the first two columns of the data set and replace
